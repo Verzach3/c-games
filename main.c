@@ -11,19 +11,21 @@ int main(void)
 
 
 
-	//Camera
-	Camera camera = { 0 };
-	camera.position = (Vector3) { 0.0f, 1.0f, -2.0f };
-	camera.target = (Vector3){ 0.0f, 0.0f, 0.0f };
-	camera.up = (Vector3){ 0.0f, 1.0f, 0.0f };
-	camera.fovy = 60.0f;
-	camera.type = CAMERA_PERSPECTIVE;
-	SetCameraMode(camera, CAMERA_FIRST_PERSON);
+
 
     //Player
-    Vector3 playerPosition = (Vector3) { camera.position.x, camera.position.y, camera.position.z };
-    Vector3 playerSize = { 0.5f, 0.5f, 0.5f };
+    Vector3 playerPosition = (Vector3) { 0.0f, 1.0f, -2.0f };
+    Vector3 playerSize = { 1.0f, 1.0f, 1.0f };
     Color playerColor = GREEN;
+
+    //Camera
+    Camera camera = { 0 };
+    camera.position = (Vector3) { 0.0f, 3.0f, -2.0f} ;
+    camera.target = playerPosition;
+    camera.up = (Vector3){ 0.0f, 1.0f, 0.0f };
+    camera.fovy = 60.0f;
+    camera.type = CAMERA_PERSPECTIVE;
+    SetCameraMode(camera, CAMERA_THIRD_PERSON);   
 
 
 	//Enemigos
@@ -58,7 +60,7 @@ int main(void)
         Vector3 oldCamPos = camera.position;
 
             //Actualiza la camara
-        playerPosition = (Vector3) { camera.position.x, camera.position.y, camera.position.z };
+        camera.target = playerPosition;
 		
 
 			//Movimiento del jugador
