@@ -46,7 +46,7 @@ int main(void)
 
 	//FPS Objetivo
 
-	SetTargetFPS(120);
+	SetTargetFPS(60);
 
     // ToggleFullscreen();
 
