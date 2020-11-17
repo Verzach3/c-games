@@ -32,21 +32,6 @@ int main(void)
     
     //--------------------------------------------------------------------------------------
 
-	//Enemigos
-
-		//BOX
-	Vector3 enemyBoxPos = { -4.0f, 1.0f, 0.0f };
-    Vector3 enemyBoxPos2 = { 6.0f, 1.0f, 0.0f };
-	Vector3 enemyBoxSize = { 2.0f, 2.0f, 2.0f };
-
-		//Sphere
-	Vector3 enemySpherePos = { 4.0f, 0.0f, 0.0f };
-	float enemySphereSize = 1.5f;
-
-
-	//Booleano de colisiones
-	bool collision = false;
-
 
 	//FPS Objetivo
 
@@ -60,8 +45,7 @@ int main(void)
 	{
 		//Update routines
 		//----------------------------------------------------------------------------------
-			//Colisiones 
-        Vector3 oldCamPos = camera.position;
+
 
             //Actualiza la camara
         camera.target = playerPosition;
@@ -75,51 +59,6 @@ int main(void)
         else if (IsKeyDown(KEY_SPACE)) camera.fovy += 0.5f;
         UpdateCamera(&camera);
 
-
-
-        // Check collisions player vs enemy-box
-        if (CheckCollisionBoxes(
-            (BoundingBox){(Vector3){ playerPosition.x - playerSize.x/2,
-                                     playerPosition.y - playerSize.y/2,
-                                     playerPosition.z - playerSize.z/2 },
-                          (Vector3){ playerPosition.x + playerSize.x/2,
-                                     playerPosition.y + playerSize.y/2,
-                                     playerPosition.z + playerSize.z/2 }},
-            (BoundingBox){
-                            (Vector3){ 
-                                    enemyBoxPos.x - enemyBoxSize.x/2,
-                                    enemyBoxPos.y - enemyBoxSize.y/2,
-                                    enemyBoxPos.z - enemyBoxSize.z/2 },
-
-                            (Vector3){ 
-                                    enemyBoxPos.x + enemyBoxSize.x/2,
-                                    enemyBoxPos.y + enemyBoxSize.y/2,
-                                    enemyBoxPos.z + enemyBoxSize.z/2 }
-
-                                })) collision = true;
-
-
-        // Check collisions player vs enemy-sphere
-        else if (CheckCollisionBoxSphere(
-            (BoundingBox){(Vector3){ playerPosition.x - playerSize.x/2,
-                                     playerPosition.y - playerSize.y/2,
-                                     playerPosition.z - playerSize.z/2 },
-                          (Vector3){ playerPosition.x + playerSize.x/2,
-                                     playerPosition.y + playerSize.y/2,
-                                     playerPosition.z + playerSize.z/2 }},
-            enemySpherePos, enemySphereSize)) collision = true;
-        else collision = false;
-
-        if (collision) DrawText("Collide", 220, 40, 20, BLUE);
-        else DrawText("Dont Collide", 220, 40, 20, BLUE);
-
-        //Colisiones
-        if (collision) camera.position = oldCamPos;
-
-
-		//----------------------------------------------------------------------------------
-
-
         // Draw
         //----------------------------------------------------------------------------------
         BeginDrawing();
@@ -128,18 +67,7 @@ int main(void)
 
             BeginMode3D(camera);
 
-                // Draw enemy-box
-                DrawCube(enemyBoxPos, enemyBoxSize.x, enemyBoxSize.y, enemyBoxSize.z, GRAY);
-                DrawCubeWires(enemyBoxPos, enemyBoxSize.x, enemyBoxSize.y, enemyBoxSize.z, DARKGRAY);
-
-                //
-                DrawCube(enemyBoxPos2, enemyBoxSize.x, enemyBoxSize.y, enemyBoxSize.z, GRAY);
-                //
-
-                // Draw enemy-sphere
-                DrawSphere(enemySpherePos, enemySphereSize, GRAY);
-                DrawSphere((Vector3) { 1.0f, 1.0f, 1.0f}, enemySphereSize, RED);
-                DrawSphereWires(enemySpherePos, enemySphereSize, 16, 16, DARKGRAY);
+                
 
                 // Draw player
                 DrawCubeV(playerPosition, playerSize, playerColor);
