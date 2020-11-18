@@ -6,12 +6,27 @@ int main(void)
 	
 	const int screenWidth = 1280;
 	const int screenHeight = 720;
+    bool fullscreen_state = IsWindowFullscreen;
 
 	InitWindow(screenWidth, screenHeight, "Verzach3's FPS Test");
 
     //--------------------------------------------------------------------------------------
 
+    //Funciones para el fullscreen
+    void fullscreen( 
+        if (!IsWindowFullscreen)
+            {
+            SetWindowSize( GetMonitorWidth(), GetMonitorHeight() )
+            ToggleFullscreen()
+            }
+        else
+            {
+            ToggleFullscreen()
+            SetWindowSize( screenWidth, screenHeight )
+            }
+                
 
+    );
 
 
     //Player
@@ -45,7 +60,10 @@ int main(void)
 	{
 		//Update routines
 		//----------------------------------------------------------------------------------
+            //Funciones para el fullscreen
+        if (IsKeyPressed(KEY_F)) ToggleFullscreen();
 
+        
 
             //Actualiza la camara
         camera.target = playerPosition;
