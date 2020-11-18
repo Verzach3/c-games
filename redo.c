@@ -6,7 +6,6 @@
 void fullscreen(void);
 void controls(void);
 void physics(void);
-void camera(void);
 void player(void);
 
 
@@ -23,6 +22,14 @@ int main(void)
     {
         //TODO LO QUE ESTA AQUI SE EJECUTA CADA FRAME
 
+        //Camara
+    Camera camera = {0};
+    camera.position = (Vector3) { 0.0f, 0.0f, 0.0f };
+    camera.target = (Vector3) { 0.0f, 0.0f, 0.0f };
+    camera.up = (Vector3) { 0.0f, 0.0f, 0.0f };
+    camera.fovy = 60.0f;
+    camera.type = CAMERA_THIRD_PERSON;
+    SetCameraMode(camera, CAMERA_THIRD_PERSON);
 
 
         //Draw
@@ -48,6 +55,5 @@ int main(void)
     return 0;
 
 }
-
 
 
