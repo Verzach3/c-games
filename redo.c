@@ -3,11 +3,11 @@
 ////////////////////////////////
 ////Declaracion de funciones////
 ////////////////////////////////
-void fullscreen(void);
-void controls(void);
-void physics(void);
-void player(void);
-
+static void fullscreen(void);
+static void controls(void);
+static void physics(void);
+static void player(void);
+static void camera(void);
 
 
 
@@ -18,6 +18,16 @@ int main(void)
     const int screenWidth = 1280;
     const int screenHeight = 720;
     InitWindow(screenWidth, screenHeight, "FPS Test");
+
+            //Camara
+    Camera camera = {0};
+    camera.position = (Vector3) { 0.0f, 3.0f, -4.0f};
+    camera.target = (Vector3) { 0.0f, 1.0f, -2.0f };
+    camera.up = (Vector3) { 0.0f, 1.0f, 0.0f };
+    camera.fovy = 60.0f;
+    camera.type = CAMERA_PERSPECTIVE;
+    SetCameraMode(camera, CAMERA_THIRD_PERSON);
+
 
     //FPS Objetivo
     SetTargetFPS(60);
@@ -33,14 +43,8 @@ int main(void)
     Color playerColor = GREEN;
 
 
-        //Camara
-    Camera camera = {0};
-    camera.position = (Vector3) { 0.0f, 3.0f, -4.0f};
-    camera.target = playerPosition;
-    camera.up = (Vector3) { 0.0f, 1.0f, 0.0f };
-    camera.fovy = 60.0f;
-    camera.type = CAMERA_PERSPECTIVE;
-    SetCameraMode(camera, CAMERA_THIRD_PERSON);
+
+    UpdateCamera(&camera);
 
 
         //Draw
@@ -68,5 +72,4 @@ int main(void)
     return 0;
 
 }
-
 
