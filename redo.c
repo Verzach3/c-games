@@ -1,5 +1,6 @@
 #include "raylib.h"
-
+#include <stdio.h>
+#include "raymath.h"
 ////////////////////////////////
 ////Declaracion de funciones////
 ////////////////////////////////
@@ -8,6 +9,11 @@ static void controls(void);
 static void physics(void);
 static void player(void);
 
+
+///////////////////////
+//Estado del debug
+debug = 1;
+///////////////////////
 
     //Player
 Vector3 playerPosition = (Vector3) { 0.0f, 1.0f, -2.0f };
@@ -20,9 +26,12 @@ Color playerColor = GREEN;
 
 
 
+
 //Funcion principal
 int main(void)
 {
+
+
     //Inicializacion de la ventana
     const int screenWidth = 1280;
     const int screenHeight = 720;
@@ -43,6 +52,15 @@ int main(void)
     //FPS Objetivo
     SetTargetFPS(60);
 
+    //modelos
+
+    float pitch = 0.0f;
+    float roll = 0.0f;
+    float yaw = 0.0f;
+
+    
+
+
     //Main Game Loop
     while (!WindowShouldClose()) //Detecta ESC o la X de la ventana
     {
@@ -55,6 +73,9 @@ int main(void)
         //Fisicas
     physics();
 
+
+    //modelos
+    
 
     //Rutinas de la camara
     UpdateCamera(&camera);
@@ -69,6 +90,7 @@ int main(void)
         BeginMode3D(camera);
         //Lo que esta aca dentro se dibuja en la pantalla
 
+            
             DrawCubeV(playerPosition, playerSize, playerColor);
             DrawGrid(10, 1.0f);
 
@@ -78,6 +100,15 @@ int main(void)
         DrawFPS(10, 10);
 
     EndDrawing();
+
+
+    //Debug || Funciones que solo se usan para probar la funcionalidad del juego no se mantienen activas en produccion
+    if (debug = 1)
+    {
+       
+       
+    }
+
 
     }
     
@@ -129,7 +160,7 @@ void physics(void)
 {
    if (playerPosition.y > 1)
    {
-       playerPosition.y -= 0.25f;
+       playerPosition.y -= 0.2f;
    }
    else if (playerPosition.y <= 0)
    {
